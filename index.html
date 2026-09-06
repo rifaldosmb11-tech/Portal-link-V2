@@ -27,27 +27,28 @@
       overflow-x: hidden;
     }
 
-    /* BACKGROUND ANIMATION */
-    .bg {
+    /* BACKGROUND VIDEO CONTAINER */
+    .bg-video-container {
       position: fixed;
       inset: 0;
-      background: url('https://cdn.areabermain.club/assets/cdn/az7/2026/08/10/20260810/b2c1200dd34728ecd2fb7891fa9961b8/bc3f48e7-c5dd-444e-909e-6d1815e2622a.png') center center no-repeat;
-      background-size: cover;
-      animation: bgZoom 20s linear infinite;
+      width: 100vw;
+      height: 100vh;
+      overflow: hidden;
       z-index: -5;
     }
 
-    .bg::before {
+    .bg-video-container video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bg-video-container::before {
       content: '';
       position: absolute;
       inset: 0;
       background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.85));
-    }
-
-    @keyframes bgZoom {
-      0%   { transform: scale(1); }
-      50%  { transform: scale(1.08); }
-      100% { transform: scale(1); }
+      z-index: 1;
     }
 
     /* EFEK KILATAN PETIR (LIGHTNING FLASH) - TANPA SUARA */
@@ -164,12 +165,12 @@
     }
 
     @keyframes flapLeft {
-      0%   { transform: rotate(0deg) scaleY(1); }
+      0%    { transform: rotate(0deg) scaleY(1); }
       100% { transform: rotate(55deg) scaleY(0.6); }
     }
 
     @keyframes flapRight {
-      0%   { transform: rotate(0deg) scaleY(1); }
+      0%    { transform: rotate(0deg) scaleY(1); }
       100% { transform: rotate(-55deg) scaleY(0.6); }
     }
 
@@ -267,7 +268,7 @@
     }
 
     @keyframes rotateRainbow {
-      0%   { transform: rotate(0deg); }
+      0%    { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
@@ -394,7 +395,7 @@
     }
 
     @keyframes gradientShift {
-      0%   { background-position: 0% 50%; }
+      0%    { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
@@ -452,7 +453,6 @@
       letter-spacing: 4px;
       position: relative;
       
-      /* Gradient Merah Darah, Ungu Gelap & Emas */
       background: linear-gradient(180deg, #ffffff 0%, #ff1a1a 35%, #8b0000 70%, #d4af37 100%);
       background-size: 200% 200%;
       -webkit-background-clip: text;
@@ -465,13 +465,13 @@
     }
 
     @keyframes bloodShift {
-      0%   { background-position: 0% 0%; }
+      0%    { background-position: 0% 0%; }
       50%  { background-position: 0% 100%; }
       100% { background-position: 0% 0%; }
     }
 
     @keyframes floatHeader {
-      0%   { transform: translateY(0px) scale(1); }
+      0%    { transform: translateY(0px) scale(1); }
       100% { transform: translateY(-6px) scale(1.02); }
     }
 
@@ -518,9 +518,7 @@
       to   { transform: translateX(-100%); }
     }
 
-    /* =========================================================
-       GLASS CARD INFO IP - POJOK KANAN ATAS WITH FIRE ANIMATION
-       ========================================================= */
+    /* GLASS CARD INFO IP */
     .glass {
       position: fixed;
       top: 50px;
@@ -543,7 +541,6 @@
       animation: fireCardFloat 3.5s ease-in-out infinite alternate;
     }
 
-    /* BORDER API BERPUTAR & BERGERAK */
     .glass::before {
       content: '';
       position: absolute;
@@ -563,7 +560,6 @@
       z-index: -2;
     }
 
-    /* LAPISAN DALAM KARTU AGAR TEKS TETAP JELAS */
     .glass::after {
       content: '';
       position: absolute;
@@ -573,7 +569,6 @@
       z-index: -1;
     }
 
-    /* EFEK CAHAYA API MEMBARA / PULSE FIRE */
     @keyframes fireCardFloat {
       0% {
         transform: translateY(0px);
@@ -586,11 +581,10 @@
     }
 
     @keyframes rotateFireBorder {
-      0%   { transform: rotate(0deg); }
+      0%    { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
 
-    /* TAMPILAN TEXT IP DAN LOKASI */
     .glass span {
       font-family: 'Orbitron', sans-serif;
       font-weight: 800;
@@ -614,7 +608,7 @@
     }
 
     @keyframes flamePulse {
-      0%   { transform: scale(1) translateY(0); filter: drop-shadow(0 0 4px #ff3300); }
+      0%    { transform: scale(1) translateY(0); filter: drop-shadow(0 0 4px #ff3300); }
       100% { transform: scale(1.25) translateY(-2px); filter: drop-shadow(0 0 12px #ffdd00); }
     }
 
@@ -668,7 +662,7 @@
     }
 
     @keyframes radarWave {
-      0%   { width: 20px; height: 20px; opacity: 0.8; }
+      0%    { width: 20px; height: 20px; opacity: 0.8; }
       100% { width: 300px; height: 300px; opacity: 0; }
     }
 
@@ -687,7 +681,7 @@
     }
 
     @keyframes elegantRedShift {
-      0%   { background-position: 0% 50%; }
+      0%    { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
@@ -810,7 +804,7 @@
     }
 
     @keyframes greenShift {
-      0%   { background-position: 0% 50%; }
+      0%    { background-position: 0% 50%; }
       50%  { background-position: 100% 50%; }
       100% { background-position: 0% 50%; }
     }
@@ -883,7 +877,12 @@
 
 <body>
 
-  <div class="bg"></div>
+  <!-- BACKGROUND VIDEO -->
+  <div class="bg-video-container">
+    <video autoplay loop muted playsinline>
+      <source src="https://motionbgs.com/media/5746/itachi-with-black-crow.960x540.mp4" type="video/mp4">
+    </video>
+  </div>
   
   <!-- ELEMEN VISUAL PETIR -->
   <div class="lightning-flash" id="lightningFlash"></div>
@@ -920,7 +919,7 @@
     </div>
   </div>
 
-  <!-- INFO IP & LOKASI (DIPINDAHKAN KE POJOK KANAN ATAS) -->
+  <!-- INFO IP & LOKASI -->
   <div class="glass">
     <span class="fire-icon">🔥</span> IP : <span id="ip">Mendeteksi...</span><br>
     <span class="fire-icon">📍</span> Lokasi : <span id="loc">Mendeteksi...</span>
@@ -1084,7 +1083,7 @@
 
       raven.style.left = Math.random() * (window.innerWidth - 40) + "px";
 
-      const duration = 6 + Math.random() * 6; // Waktu terbang 6 - 12 detik
+      const duration = 6 + Math.random() * 6;
       raven.style.animationDuration = duration + "s";
       
       const scale = 0.6 + Math.random() * 0.7;
@@ -1105,7 +1104,7 @@
 
       feather.style.left = Math.random() * window.innerWidth + "px";
 
-      const duration = 5 + Math.random() * 5; // Waktu jatuh 5 - 10 detik
+      const duration = 5 + Math.random() * 5;
       feather.style.animationDuration = duration + "s";
 
       container.appendChild(feather);
@@ -1113,11 +1112,10 @@
       setTimeout(() => feather.remove(), duration * 1000);
     }
 
-    // Interval pemanggilan animasi gagak & bulu
     setInterval(createCrow, 1800);
     setInterval(createFeather, 1200);
 
-    /* VISUALISASI KILATAN DAN GARIS PETIR (RINGAN & TANPA SUARA) */
+    /* VISUALISASI KILATAN DAN GARIS PETIR */
     const canvas = document.getElementById('lightningCanvas');
     const ctx = canvas.getContext('2d');
 
@@ -1129,7 +1127,7 @@
     resizeCanvas();
 
     function drawBolt(startX, startY, length, angle, branchCapacity) {
-      if (branchCapacity <= 0) return;
+      if (branchCapacity <= 0 || length <= 0) return;
 
       ctx.beginPath();
       ctx.moveTo(startX, startY);
@@ -1138,49 +1136,41 @@
       let currentY = startY;
 
       for (let i = 0; i < length; i++) {
-        currentX += Math.sin(angle) * 8 + (Math.random() - 0.5) * 12;
-        currentY += Math.cos(angle) * 8 + (Math.random() - 0.5) * 8;
-
+        currentX += Math.sin(angle) * 5 + (Math.random() - 0.5) * 8;
+        currentY += Math.cos(angle) * 5 + (Math.random() - 0.5) * 4;
         ctx.lineTo(currentX, currentY);
 
-        if (Math.random() < 0.08 && branchCapacity > 1) {
+        if (Math.random() < 0.15 && branchCapacity > 1) {
           drawBolt(currentX, currentY, Math.floor(length * 0.6), angle + (Math.random() - 0.5) * 0.8, branchCapacity - 1);
         }
       }
 
-      ctx.strokeStyle = "rgba(230, 245, 255, 0.9)";
-      ctx.lineWidth = 2;
-      ctx.shadowColor = "rgba(0, 255, 255, 0.8)";
-      ctx.shadowBlur = 10;
+      ctx.strokeStyle = "rgba(255, 255, 255, 0.9)";
+      ctx.lineWidth = Math.random() * 2 + 1;
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = "#00ffff";
       ctx.stroke();
     }
 
     function triggerLightning() {
-      const flashElem = document.getElementById('lightningFlash');
+      const flash = document.getElementById("lightningFlash");
       
-      // Flash layar singkat
-      flashElem.classList.remove('flash-active');
-      void flashElem.offsetWidth; // Reflow
-      flashElem.classList.add('flash-active');
+      flash.classList.add("flash-active");
+      setTimeout(() => flash.classList.remove("flash-active"), 350);
 
-      // Gambar Garis Petir
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       const startX = Math.random() * canvas.width;
-      drawBolt(startX, 0, Math.floor(canvas.height / 10), 0, 3);
+      drawBolt(startX, 0, Math.floor(canvas.height / 6), 0, 3);
 
-      // Hapus garis petir secara cepat
       setTimeout(() => {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-      }, 350);
+      }, 250);
 
-      // Interval petir secara acak (ringan di CPU)
-      const nextDelay = 6000 + Math.random() * 10000;
-      setTimeout(triggerLightning, nextDelay);
+      const nextStrike = Math.random() * 7000 + 3000;
+      setTimeout(triggerLightning, nextStrike);
     }
 
-    // Memulai petir pertama setelah 3 detik
-    setTimeout(triggerLightning, 3000);
+    setTimeout(triggerLightning, 2000);
   </script>
-
 </body>
 </html>
